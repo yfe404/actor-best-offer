@@ -12,5 +12,4 @@
     }
   },
   "required": ["datasetId"],
-  "additionalProperties": false
 }
