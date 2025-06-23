@@ -8,6 +8,7 @@
       "title": "Dataset ID",
       "type": "string",
       "description": "A unique identifier for the dataset containing offers for products."
+      "editor": "text",
     }
   },
   "required": ["datasetId"],
