@@ -11,5 +11,5 @@
       "editor": "text"
     }
   },
-  "required": ["datasetId"],
+  "required": ["datasetId"]
 }
