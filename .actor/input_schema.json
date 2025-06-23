@@ -1,15 +1,15 @@
 {
-    "title": "Scrape data from a web page",
-    "type": "object",
-    "schemaVersion": 1,
-    "properties": {
-        "url": {
-            "title": "URL of the page",
-            "type": "string",
-            "description": "The URL of website you want to get the data from.",
-            "editor": "textfield",
-            "prefill": "https://www.apify.com"
-        }
-    },
-    "required": ["url"]
+  "title": "Dataset ID Schema",
+  "description": "A schema to define the structure of a dataset ID.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "datasetId": {
+      "title": "Dataset ID",
+      "type": "string",
+      "description": "A unique identifier for the dataset containing offers for products."
+    }
+  },
+  "required": ["datasetId"],
+  "additionalProperties": false
 }
