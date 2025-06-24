@@ -56,6 +56,9 @@ const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer
   {}
 );
 
+console.log(`Filtered to ${Object.keys(cheapestOffers).length} cheapest offers.`);
+
+
 // Save each cheapest offer to the dataset
 for (const offer of Object.values(cheapestOffers)) {
     console.log(`Saving cheapest offer for ASID ${offer.asin}: ${offer.title} - ${offer.offer}`);
