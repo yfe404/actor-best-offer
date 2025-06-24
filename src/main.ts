@@ -39,10 +39,13 @@ const dataset = await Actor.openDataset(datasetId);
 
 // each item is an Offer object
 const items: Offer[] = [];
+console.log(`Fetching dataset with ID: ${datasetId}`);
 
 dataset.forEach((item) => {
     items.push(item as Offer);
 });
+
+console.log(`Fetched ${items.length} items from the dataset.`);
 
 // filter items to only the cheapest one per asid
 const cheapestOffers: Record<string, Offer> = {};
