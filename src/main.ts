@@ -43,13 +43,13 @@ console.log(`Fetched ${offers.length} offers from the dataset.`);
 
 // filter items to only the cheapest one per asin
 const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer>>(
-  (acc, offer) => {
-    const prev = acc[offer.asin];
-    const currPrice = parsePrice(offer.offer);
+  (acc, offerData) => {
+    const prev = acc[offerData.asin];
+    const currPrice = parsePrice(offerData.offer);
     const prevPrice = prev ? parsePrice(prev.offer) : Infinity;
 
     if (currPrice < prevPrice) {
-      acc[offer.asin] = offer;
+      acc[offerData.asin] = offerData;
     }
     return acc;
   },
@@ -57,7 +57,6 @@ const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer
 );
 
 console.log(`Filtered to ${Object.keys(cheapestOffers).length} cheapest offers.`);
-
 
 // Save each cheapest offer to the dataset
 for (const offer of Object.values(cheapestOffers)) {
