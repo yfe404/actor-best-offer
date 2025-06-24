@@ -59,7 +59,7 @@ const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer
 // Save each cheapest offer to the dataset
 for (const offer of Object.values(cheapestOffers)) {
     console.log(`Saving cheapest offer for ASID ${offer.asid}: ${offer.title} - ${offer.offer}`);
-    await dataset.pushData(offer);
+    await Actor.pushData(offer);
 }
 
 // Gracefully exit the Actor process. It's recommended to quit all Actors with an exit().
