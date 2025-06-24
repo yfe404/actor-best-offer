@@ -41,7 +41,7 @@ const dataset = await Actor.openDataset(datasetId);
 const items: Offer[] = [];
 console.log(`Fetching dataset with ID: ${datasetId}`);
 
-dataset.forEach((item) => {
+await dataset.forEach((item) => {
     items.push(item as Offer);
 });
 
