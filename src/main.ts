@@ -1,9 +1,5 @@
 // Apify SDK - toolkit for building Apify Actors (Read more at https://docs.apify.com/sdk/js/).
 import { Actor } from 'apify';
-// Axios - Promise based HTTP client for the browser and node.js (Read more at https://axios-http.com/docs/intro).
-import axios from 'axios';
-// Cheerio - The fast, flexible & elegant library for parsing and manipulating HTML and XML (Read more at https://cheerio.js.org/).
-import * as cheerio from 'cheerio';
 
 // this is ESM project, and as such, it requires you to specify extensions in your relative imports
 // read more about this here: https://nodejs.org/docs/latest-v18.x/api/esm.html#mandatory-file-extensions
@@ -14,32 +10,24 @@ import * as cheerio from 'cheerio';
 await Actor.init();
 
 interface Input {
-    url: string;
+    datasetId: string;
 }
 // Structure of input is defined in input_schema.json
 const input = await Actor.getInput<Input>();
 if (!input) throw new Error('Input is missing!');
-const { url } = input;
+const { datasetId } = input;
 
-// Fetch the HTML content of the page.
-const response = await axios.get(url);
+if (!datasetId) {
+    throw new Error('Please provide a `datasetId` in the input.');
+}
 
-// Parse the downloaded HTML with Cheerio to enable data extraction.
-const $ = cheerio.load(response.data);
+// Open the specified dataset
+const dataset = await Actor.openDataset(datasetId);
 
-// Extract all headings from the page (tag name and text).
-const headings: { level: string; text: string }[] = [];
-$('h1, h2, h3, h4, h5, h6').each((_i, element) => {
-    const headingObject = {
-        level: $(element).prop('tagName')!.toLowerCase(),
-        text: $(element).text(),
-    };
-    console.log('Extracted heading', headingObject);
-    headings.push(headingObject);
-});
-
-// Save headings to Dataset - a table-like storage.
-await Actor.pushData(headings);
+// Fetch and log items (up to first 100)
+console.log(`Logging up to 100 items from dataset ${datasetId}:`);
+const { items } = await dataset.getData({ limit: 100 });
+items.forEach((item) => console.log(item));
 
 // Gracefully exit the Actor process. It's recommended to quit all Actors with an exit().
 await Actor.exit();
