@@ -54,6 +54,7 @@ items.forEach((item) => {
 
 // Save each cheapest offer to the dataset
 for (const offer of Object.values(cheapestOffers)) {
+    console.log(`Saving cheapest offer for ASID ${offer.asid}: ${offer.title} - ${offer.offer}`);
     await dataset.pushData(offer);
 }
 
