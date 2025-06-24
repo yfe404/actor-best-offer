@@ -8,7 +8,7 @@ interface Input {
 
 interface Offer {
     title: string;
-    asid: string;
+    asin: string;
     itemUrl: string;
     description: string;
     keyword: string;
@@ -41,15 +41,15 @@ const dataset = await Actor.openDataset(datasetId);
 const offers: Offer[] = await dataset.map(item => item as Offer);
 console.log(`Fetched ${offers.length} offers from the dataset.`);
 
-// filter items to only the cheapest one per asid
+// filter items to only the cheapest one per asin
 const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer>>(
   (acc, offer) => {
-    const prev = acc[offer.asid];
+    const prev = acc[offer.asin];
     const currPrice = parsePrice(offer.offer);
     const prevPrice = prev ? parsePrice(prev.offer) : Infinity;
 
     if (currPrice < prevPrice) {
-      acc[offer.asid] = offer;
+      acc[offer.asin] = offer;
     }
     return acc;
   },
@@ -58,7 +58,7 @@ const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer
 
 // Save each cheapest offer to the dataset
 for (const offer of Object.values(cheapestOffers)) {
-    console.log(`Saving cheapest offer for ASID ${offer.asid}: ${offer.title} - ${offer.offer}`);
+    console.log(`Saving cheapest offer for ASID ${offer.asin}: ${offer.title} - ${offer.offer}`);
     await Actor.pushData(offer);
 }
 
