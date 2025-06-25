@@ -18,6 +18,7 @@ interface Offer {
 
 // function to parse the price in the forme '$valueInDollars' to a number
 function parsePrice(price: string): number {
+    console.log(`Attempting to parse: ${price}`);
     const match = price.match(/^\$(\d+(\,\d+)?(\.\d{1,2})?)$/);
     if (!match) {
         console.log(`Invalid price format: ${price}`);
