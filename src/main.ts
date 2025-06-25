@@ -24,7 +24,7 @@ function parsePrice(price: string): number {
         console.log(`Invalid price format: ${price}`);
         throw new Error(`Invalid price format: ${price}`);
     }
-    return parseFloat(match[1]);
+    return parseFloat(match[1]).replace(',', '');
 }
 
 // Structure of input is defined in input_schema.json
