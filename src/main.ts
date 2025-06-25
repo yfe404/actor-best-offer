@@ -20,6 +20,7 @@ interface Offer {
 function parsePrice(price: string): number {
     const match = price.match(/^\$(\d+(\,\d+)?(\.\d{1,2})?)$/);
     if (!match) {
+        console.log(`Invalid price format: ${price}`);
         throw new Error(`Invalid price format: ${price}`);
     }
     return parseFloat(match[1]);
