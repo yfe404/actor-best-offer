@@ -40,23 +40,20 @@ if (!datasetId) {
 const dataset = await Actor.openDataset(datasetId);
 
 // each item is an Offer object
-const offers: Offer[] = await dataset.map(item => item as Offer);
+const offers: Offer[] = await dataset.map((item) => item as Offer);
 console.log(`Fetched ${offers.length} offers from the dataset.`);
 
 // filter items to only the cheapest one per asin
-const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer>>(
-  (acc, offerData) => {
+const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer>>((acc, offerData) => {
     const prev = acc[offerData.asin];
     const currPrice = parsePrice(offerData.offer);
     const prevPrice = prev ? parsePrice(prev.offer) : Infinity;
 
     if (currPrice < prevPrice) {
-      acc[offerData.asin] = offerData;
+        acc[offerData.asin] = offerData;
     }
     return acc;
-  },
-  {}
-);
+}, {});
 
 console.log(`Filtered to ${Object.keys(cheapestOffers).length} cheapest offers.`);
 
