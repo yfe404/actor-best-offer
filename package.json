@@ -28,6 +28,7 @@
 		"start:prod": "node dist/main.js",
 		"start:dev": "tsx src/main.ts",
 		"build": "tsc",
+        "typecheck": "tsc --noEmit",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix",
 		"format": "prettier --write .",
