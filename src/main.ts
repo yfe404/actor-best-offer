@@ -17,7 +17,6 @@ interface Offer {
     price: number;
 }
 
-// Structure of input is defined in input_schema.json
 const input = await Actor.getInput<Input>();
 if (!input) throw new Error('Input is missing!');
 const { datasetId } = input;
@@ -26,8 +25,10 @@ if (!datasetId) {
     throw new Error('Please provide a `datasetId` in the input.');
 }
 
-// @todo check if error occured
 const dataset = await Actor.openDataset(datasetId);
+if (!dataset) {
+    throw new Error(`Dataset with ID ${datasetId} not found.`);
+}
 
 // each item is an Offer object
 const offers: Offer[] = await dataset.map((item) => item as Offer);
