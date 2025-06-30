@@ -14,17 +14,7 @@ interface Offer {
     keyword: string;
     sellerName: string;
     offer: string;
-}
-
-// function to parse the price in the forme '$valueInDollars' to a number
-function parsePrice(price: string): number {
-    console.log(`Attempting to parse: ${price}`);
-    const match = price.match(/^\$(\d+(,\d+)?(\.\d{1,2})?)$/);
-    if (!match) {
-        console.log(`Invalid price format: ${price}`);
-        throw new Error(`Invalid price format: ${price}`);
-    }
-    return parseFloat(match[1].replace(',', ''));
+    price: number;
 }
 
 // Structure of input is defined in input_schema.json
@@ -46,8 +36,8 @@ console.log(`Fetched ${offers.length} offers from the dataset.`);
 // filter items to only the cheapest one per asin
 const cheapestOffers: Record<string, Offer> = offers.reduce<Record<string, Offer>>((acc, offerData) => {
     const prev = acc[offerData.asin];
-    const currPrice = parsePrice(offerData.offer);
-    const prevPrice = prev ? parsePrice(prev.offer) : Infinity;
+    const currPrice = offerData.price;
+    const prevPrice = prev ? prev.price : Infinity;
 
     if (currPrice < prevPrice) {
         acc[offerData.asin] = offerData;
