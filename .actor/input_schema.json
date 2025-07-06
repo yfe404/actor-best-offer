@@ -1,15 +1,15 @@
 {
-  "title": "Dataset ID Schema",
-  "description": "A schema to define the structure of a dataset ID.",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-    "datasetId": {
-      "title": "Dataset ID",
-      "type": "string",
-      "description": "A unique identifier for the dataset containing offers for products.",
-      "editor": "textfield"
-    }
-  },
-  "required": ["datasetId"]
+    "title": "Dataset ID Schema",
+    "description": "A schema to define the structure of a dataset ID.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "datasetId": {
+            "title": "Dataset ID",
+            "type": "string",
+            "description": "A unique identifier for the dataset containing offers for products.",
+            "editor": "textfield"
+        }
+    },
+    "required": ["datasetId"]
 }
